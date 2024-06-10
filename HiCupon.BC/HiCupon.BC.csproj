@@ -6,4 +6,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="BusinessLogic\" />
+    <Folder Include="Constatnts\" />
+    <Folder Include="Enums\" />
+  </ItemGroup>
+
 </Project>
