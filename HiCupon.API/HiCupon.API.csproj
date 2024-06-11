@@ -13,7 +13,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    <ProjectReference Include="..\HiCupon.BC\HiCupon.BC.csproj" />
+    <ProjectReference Include="..\HiCupon.BW\HiCupon.BW.csproj" />
+    <ProjectReference Include="..\HiCupon.DA\HiCupon.DA.csproj" />
+    <ProjectReference Include="..\HiCupon.SG\HiCupon.SG.csproj" />
   </ItemGroup>
 
 </Project>

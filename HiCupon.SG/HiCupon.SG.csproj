@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\HiCupon.BC\HiCupon.BC.csproj" />
+    <ProjectReference Include="..\HiCupon.BW\HiCupon.BW.csproj" />
+  </ItemGroup>
+
 </Project>
