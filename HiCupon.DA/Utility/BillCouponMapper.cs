@@ -13,7 +13,7 @@ namespace HiCupon.DA.Utility
                 {
                     Id = billId
                 },
-                CouponId = billCoupon.CouponId,
+                CouponId = billCoupon.Coupon.Id,
                 Quantity = billCoupon.Quantity
             };
 

@@ -19,8 +19,8 @@ namespace HiCupon.DA.Entities
         [Required, Column("IDENTIFICATION_CARD")]
         public string IdentificationCard { get; set; } = string.Empty;
 
-        [Required, Column("DATE_BIRTH")]
-        public DateTime DateBirth { get; set; }
+        [Required, Column("BIRTH_DATE")]
+        public DateTime BirthDate { get; set; }
 
         [Required, Column("EMAIL")]
         public string Email { get; set; } = string.Empty;

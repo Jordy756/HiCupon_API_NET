@@ -12,7 +12,7 @@ namespace HiCupon.BW.CU
         {
             _manageUserDA = manageUserDA;
         }
-        public async Task<string> InsertUser(User user)
+        public async Task<(bool, string)> InsertUser(User user)
         {
             return await _manageUserDA.InsertUser(user);
         }

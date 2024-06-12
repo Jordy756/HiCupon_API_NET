@@ -1,11 +1,13 @@
-﻿namespace HiCupon.API.DTOs
+﻿using HiCupon.BC.Models;
+
+namespace HiCupon.API.DTOs
 {
     public class CouponDTO
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public string ImageURL { get; set; }
+        public string Image { get; set; }
         public DateTime CreationDate { get; set; }
         public DateTime ReleaseDate { get; set; }
         public DateTime ExpirationDate { get; set; }
@@ -23,7 +25,7 @@
             this.Id = 0;
             this.Name = string.Empty;
             this.Description = string.Empty;
-            this.ImageURL = string.Empty;
+            this.Image = string.Empty;
             this.CreationDate = DateTime.MinValue;
             this.ReleaseDate = DateTime.MinValue;
             this.ExpirationDate = DateTime.MinValue;
@@ -37,23 +39,23 @@
             this.CouponPromotionDTOs = new List<CouponPromotionDTO>();
         }
 
-        public CouponDTO(int id, string name, string description, string imageUrl, DateTime creationDate, DateTime releaseDate, DateTime expirationDate, decimal price, string location, int discount, int stock, CompanyDTO companyDTO, CategoryDTO categoryDTO, bool isActive, IEnumerable<CouponPromotionDTO> CouponPromotionDTOs)
+        public CouponDTO(int id, string name, string description, string image, DateTime creationDate, DateTime releaseDate, DateTime expirationDate, decimal price, int stock, string location, int discount, bool isActive, CategoryDTO categoryDTO, CompanyDTO companyDTO, IEnumerable<CouponPromotionDTO> couponPromotionDTOs)
         {
             Id = id;
             Name = name;
             Description = description;
-            ImageURL = imageUrl;
+            Image = image;
             CreationDate = creationDate;
             ReleaseDate = releaseDate;
             ExpirationDate = expirationDate;
             Price = price;
+            Stock = stock;
             Location = location;
             Discount = discount;
-            Stock = stock;
-            CompanyDTO = companyDTO;
-            CategoryDTO = categoryDTO;
             IsActive = isActive;
-            this.CouponPromotionDTOs = new List<CouponPromotionDTO>();
+            CategoryDTO = categoryDTO;
+            CompanyDTO = companyDTO;
+            CouponPromotionDTOs = couponPromotionDTOs;
         }
     }
 }

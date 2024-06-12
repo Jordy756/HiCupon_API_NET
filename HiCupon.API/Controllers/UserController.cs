@@ -21,7 +21,8 @@ namespace HiCupon.API.Controllers
         {
             try
             {
-                return Ok(new { message = await _manageUserBW.InsertUser(UserMapper.MapToUser(userDTO)) });
+                var result = await _manageUserBW.InsertUser(UserMapper.MapToUser(userDTO));
+                return result.Item1 ? Ok(new { message = result.Item2 }) : BadRequest(new { message = result.Item2 });
             }
             catch (Exception ex)
             {
@@ -34,7 +35,8 @@ namespace HiCupon.API.Controllers
         {
             try
             {
-                return Ok(UserMapper.MapToUserDTO(await _manageUserBW.AuthenticateUser(email, password)));
+                var user = await _manageUserBW.AuthenticateUser(email, password);
+                return user.Id > 0 ? Ok(UserMapper.MapToUserDTO(user)) : BadRequest("Usuario no encontrado");
             }
             catch (Exception ex)
             {

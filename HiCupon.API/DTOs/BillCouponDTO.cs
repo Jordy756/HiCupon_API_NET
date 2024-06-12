@@ -3,23 +3,20 @@
     public class BillCouponDTO
     {
         public int Id { get; set; }
-        public BillDTO BillDTO { get; set; }
-        public int CouponId { get; set; }
+        public CouponDTO CouponDTO { get; set; }
         public int Quantity { get; set; }
 
         public BillCouponDTO()
         {
             this.Id = 0;
-            this.BillDTO = new BillDTO();
-            this.CouponId = 0;
+            this.CouponDTO = new CouponDTO();
             this.Quantity = 0;
         }
 
-        public BillCouponDTO(int id, BillDTO billDTO, int couponId, int quantity)
+        public BillCouponDTO(int id, CouponDTO coupon, int quantity)
         {
             this.Id = id;
-            this.BillDTO = billDTO;
-            this.CouponId = couponId;
+            this.CouponDTO = coupon;
             this.Quantity = quantity;
         }
     }

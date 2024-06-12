@@ -9,7 +9,7 @@ namespace HiCupon.BC.BusinessRules
             if (string.IsNullOrEmpty(user.Name)) throw new Exception("El nombre del cliente no puede ir vacío");
             if (string.IsNullOrEmpty(user.LastName)) throw new Exception("El apellido del cliente no puede ir vacío");
             if (string.IsNullOrEmpty(user.IdentificationCard)) throw new Exception("La identificación del cliente no puede ir vacía");
-            if (user.DateBirth == DateTime.MinValue) throw new Exception("La fecha de nacimiento del cliente no puede ir vacía");
+            if (user.BirthDate == DateTime.MinValue) throw new Exception("La fecha de nacimiento del cliente no puede ir vacía");
 
             return true;
         }

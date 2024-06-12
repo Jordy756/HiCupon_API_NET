@@ -8,26 +8,28 @@ namespace HiCupon.API.Utility
     {
         public static BillCouponDTO MapToBillCouponDTO(BillCoupon billCoupon)
         {
-            BillCouponDTO billCouponDTO = new(
-                billCoupon.Id,
-                BillMapper.MapToBillDTO(billCoupon.Bill),
-                billCoupon.CouponId,
-                billCoupon.Quantity
-            );
+            return new BillCouponDTO();
+            //BillCouponDTO billCouponDTO = new(
+            //    billCoupon.Id,
+            //    BillMapper.MapToBillDTO(billCoupon.Bill),
+            //    billCoupon.Coupon,
+            //    billCoupon.Quantity
+            //);
 
-            return billCouponDTO;
+            //return billCouponDTO;
         }
 
         public static BillCoupon MapToBillCoupon(BillCouponDTO billCouponDTO)
         {
-            BillCoupon billCoupon= new(
-                billCouponDTO.Id,
-                new Bill( billCouponDTO.BillDTO.Id, UserMapper.MapToUser(billCouponDTO.BillDTO.UserDTO), billCouponDTO.BillDTO.BasePrice, billCouponDTO.BillDTO.Iva, billCouponDTO.BillDTO.Total, MapToBillCoupons(billCouponDTO.BillDTO.BillCouponDTOs)),
-                billCouponDTO.CouponId,
-                billCouponDTO.Quantity
-            );
+            return new BillCoupon();
+            //BillCoupon billCoupon= new(
+            //    billCouponDTO.Id,
+            //    new Bill( billCouponDTO.BillDTO.Id, UserMapper.MapToUser(billCouponDTO.BillDTO.UserDTO), billCouponDTO.BillDTO.BasePrice, billCouponDTO.BillDTO.Iva, billCouponDTO.BillDTO.Total, MapToBillCoupons(billCouponDTO.BillDTO.BillCouponDTOs)),
+            //    billCouponDTO.CouponDTO,
+            //    billCouponDTO.Quantity
+            //);
 
-            return billCoupon;
+            //return billCoupon;
         }
 
         public static IEnumerable<BillCouponDTO> MapToBillCouponDTOs(IEnumerable<BillCoupon> billCoupons)

@@ -6,7 +6,7 @@
         public string Name { get; set; }
         public string LastName { get; set; }
         public string IdentificationCard { get; set; }
-        public DateTime DateBirth { get; set; }
+        public DateTime BirthDate { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
         public IEnumerable<Bill> Bills { get; set; }
@@ -17,19 +17,19 @@
             this.Name = string.Empty;
             this.LastName = string.Empty;
             this.IdentificationCard = string.Empty;
-            this.DateBirth = DateTime.MinValue;
+            this.BirthDate = DateTime.MinValue;
             this.Email = string.Empty;
             this.Password = string.Empty;
             this.Bills = new List<Bill>();
         }
 
-        public User(int id, string name, string lastName, string identificationCard, DateTime dateBirth, string email, string password)
+        public User(int id, string name, string lastName, string identificationCard, DateTime birthDate, string email, string password)
         {
             this.Id = id;
             this.Name = name;
             this.LastName = lastName;
             this.IdentificationCard = identificationCard;
-            this.DateBirth = dateBirth;
+            this.BirthDate = birthDate;
             this.Email = email;
             this.Password = password;
             this.Bills = new List<Bill>();

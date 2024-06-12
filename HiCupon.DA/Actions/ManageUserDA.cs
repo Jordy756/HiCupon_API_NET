@@ -15,34 +15,30 @@ namespace HiCupon.DA.Actions
             _context = context;
         }
 
-        public async Task<string> InsertUser(User user)
+        public async Task<(bool, string)> InsertUser(User user)
         {
             UserDA userDA = new UserDA
             {
                 Name = user.Name,
                 LastName = user.LastName,
                 IdentificationCard = user.IdentificationCard,
-                DateBirth = user.DateBirth,
+                BirthDate = user.BirthDate,
                 Email = user.Email,
                 Password = user.Password,
             };
 
             await _context.UserDAs.AddAsync(userDA);
-            if (await _context.SaveChangesAsync() == 0) throw new Exception("Error al crear la cuenta");
+            var result = await _context.SaveChangesAsync();
 
-            return "Cuenta creada correctamente";
+            return result > 0 ? (true, "Usuario registrado correctamente") : (false, "Error al registrar usuario");
         }
 
         public async Task<User> AuthenticateUser(string email, string password)
         {
-            User user = await _context.UserDAs
+            return await _context.UserDAs
                 .Where(user => user.Email == email && user.Password == password)
-                .Select(user => new User(user.Id, user.Name, user.LastName, user.IdentificationCard, user.DateBirth, user.Email, user.Password))
+                .Select(user => new User(user.Id, user.Name, user.LastName, user.IdentificationCard, user.BirthDate, user.Email, user.Password))
                 .FirstOrDefaultAsync() ?? new User();
-
-            if (user.Id == 0) throw new Exception("Correo y contraseña incorrectos");
-
-            return user;
         }
     }
 }

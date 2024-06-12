@@ -17,7 +17,7 @@
             this.Promotion = new Promotion();
         }
 
-        public CouponPromotion(int id, int discount, DateTime startDate, DateTime endDate,  Promotion promotion)
+        public CouponPromotion(int id, int discount, DateTime startDate, DateTime endDate, Promotion promotion)
         {
             Id = id;
             Discount = discount;

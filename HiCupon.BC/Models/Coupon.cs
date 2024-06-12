@@ -5,7 +5,7 @@
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public string ImageURL { get; set; }
+        public string Image { get; set; }
         public DateTime CreationDate { get; set; }
         public DateTime ReleaseDate { get; set; }
         public DateTime ExpirationDate { get; set; }
@@ -23,7 +23,7 @@
             this.Id = 0;
             this.Name = string.Empty;
             this.Description = string.Empty;
-            this.ImageURL = string.Empty;
+            this.Image = string.Empty;
             this.CreationDate = DateTime.MinValue;
             this.ReleaseDate = DateTime.MinValue;
             this.ExpirationDate = DateTime.MinValue;
@@ -37,12 +37,12 @@
             this.CouponPromotions = new List<CouponPromotion>();
         }
 
-        public Coupon(int id, string name, string description, string imageUrl, DateTime creationDate, DateTime releaseDate, DateTime expirationDate, decimal price, string location, int discount, int stock, Company company, Category category, bool isActive, IEnumerable<CouponPromotion> CouponPromotions)
+        public Coupon(int id, string name, string description, string image, DateTime creationDate, DateTime releaseDate, DateTime expirationDate, decimal price, string location, int discount, int stock, Company company, Category category, bool isActive, IEnumerable<CouponPromotion> CouponPromotions)
         {
             Id = id;
             Name = name;
             Description = description;
-            ImageURL = imageUrl;
+            Image = image;
             CreationDate = creationDate;
             ReleaseDate = releaseDate;
             ExpirationDate = expirationDate;
@@ -53,7 +53,7 @@
             Company = company;
             Category = category;
             IsActive = isActive;
-            this.CouponPromotions = new List<CouponPromotion>();
+            this.CouponPromotions = CouponPromotions;
         }
     }
 }

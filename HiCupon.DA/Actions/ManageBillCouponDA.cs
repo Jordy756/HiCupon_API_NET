@@ -24,7 +24,7 @@ namespace HiCupon.DA.Actions
             BillCouponDA billCouponDA = new()
             {
                 BillDA = billDA,
-                CouponId = billCoupon.CouponId,
+                CouponId = billCoupon.Coupon.Id,
                 Quantity = billCoupon.Quantity
             };
 
@@ -42,17 +42,9 @@ namespace HiCupon.DA.Actions
                 .Where(billCouponDA => billCouponDA.BillDA.Id == billId)
                 .Select(billCouponDA => new BillCoupon(
                     billCouponDA.Id,
-                    new Bill(
-                        billCouponDA.BillDA.Id,
-                        new User(),
-                        billCouponDA.BillDA.BasePrice,
-                        billCouponDA.BillDA.Iva,
-                        billCouponDA.BillDA.Total,
-                        new List<BillCoupon>()
-                        ),
-                    billCouponDA.CouponId,
+                    new Coupon(),
                     billCouponDA.Quantity
-                    )).ToListAsync();
+                )).ToListAsync();
         } 
     }
 }

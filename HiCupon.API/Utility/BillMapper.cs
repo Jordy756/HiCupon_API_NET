@@ -10,34 +10,36 @@ namespace HiCupon.API.Utility
     {
         public static BillDTO MapToBillDTO(Bill bill)
         {
-            BillDTO billDTO = new(
-                bill.Id,
-                new UserDTO(bill.User.Id, bill.User.Name, bill.User.LastName, bill.User.IdentificationCard, bill.User.DateBirth, bill.User.Email, bill.User.Password), /*UserMapper.MapToUserDTO(bill.User),*/
-                bill.BasePrice,
-                bill.Iva,
-                bill.Total,
-                BillCouponMapper.MapToBillCouponDTOs(bill.BillCoupons)
-            );
+            return new BillDTO();
+            //BillDTO billDTO = new(
+            //    bill.Id,
+            //    new UserDTO(bill.User.Id, bill.User.Name, bill.User.LastName, bill.User.IdentificationCard, bill.User.DateBirth, bill.User.Email, bill.User.Password), /*UserMapper.MapToUserDTO(bill.User),*/
+            //    bill.BasePrice,
+            //    bill.Iva,
+            //    bill.Total,
+            //    BillCouponMapper.MapToBillCouponDTOs(bill.BillCoupons)
+            //);
 
-            billDTO.BillCouponDTOs = BillCouponMapper.MapToBillCouponDTOs(bill.BillCoupons);
+            //billDTO.BillCouponDTOs = BillCouponMapper.MapToBillCouponDTOs(bill.BillCoupons);
 
-            return billDTO;
+            //return billDTO;
         }
 
         public static Bill MapToBill(BillDTO billDTO)
         {
-            Bill bill = new(
-                billDTO.Id,
-                UserMapper.MapToUser(billDTO.UserDTO), //new User(billDTO.UserDTO.Id, billDTO.UserDTO.Name, billDTO.UserDTO.LastName, billDTO.UserDTO.IdentificationCard, billDTO.UserDTO.DateBirth, billDTO.UserDTO.Email, billDTO.UserDTO.Password),
-                billDTO.BasePrice,
-                billDTO.Iva,
-                billDTO.Total,
-                BillCouponMapper.MapToBillCoupons(billDTO.BillCouponDTOs) 
-            );
+            return new Bill();
+            //Bill bill = new(
+            //    billDTO.Id,
+            //    UserMapper.MapToUser(billDTO.UserDTO), //new User(billDTO.UserDTO.Id, billDTO.UserDTO.Name, billDTO.UserDTO.LastName, billDTO.UserDTO.IdentificationCard, billDTO.UserDTO.DateBirth, billDTO.UserDTO.Email, billDTO.UserDTO.Password),
+            //    billDTO.BasePrice,
+            //    billDTO.Iva,
+            //    billDTO.Total,
+            //    BillCouponMapper.MapToBillCoupons(billDTO.BillCouponDTOs) 
+            //);
 
-            bill.BillCoupons = BillCouponMapper.MapToBillCoupons(billDTO.BillCouponDTOs);
+            //bill.BillCoupons = BillCouponMapper.MapToBillCoupons(billDTO.BillCouponDTOs);
 
-            return bill;
+            //return bill;
         }
         public static IEnumerable<BillDTO> MapToBillDTOs(IEnumerable<Bill> bills)
         {

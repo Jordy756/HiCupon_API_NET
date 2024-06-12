@@ -3,23 +3,20 @@
     public class BillCoupon
     {
         public int Id { get; set; }
-        public Bill Bill { get; set; }
-        public int CouponId { get; set; }
+        public Coupon Coupon { get; set; }
         public int Quantity { get; set; }
 
         public BillCoupon()
         {
             this.Id = 0;
-            this.Bill = new Bill();
-            this.CouponId = 0;
+            this.Coupon = new Coupon();
             this.Quantity = 0;
         }
 
-        public BillCoupon(int id, Bill bill, int couponId, int quantity)
+        public BillCoupon(int id, Coupon coupon, int quantity)
         {
             this.Id = id;
-            this.Bill = bill;
-            this.CouponId = couponId;
+            this.Coupon = coupon;
             this.Quantity = quantity;
         }
     }

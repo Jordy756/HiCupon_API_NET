@@ -28,7 +28,7 @@ namespace HiCupon.DA.Actions
                 Total = bill.Total,
                 BillCouponDAs = bill.BillCoupons.Select(r => new BillCouponDA
                 {
-                    BillDA = _context.BillDAs.Find(r.Bill.Id) ?? new(),
+                    BillDA = _context.BillDAs.Find(r.Coupon.Id) ?? new(),
                 }).ToList()
             };
 
@@ -42,27 +42,19 @@ namespace HiCupon.DA.Actions
 
         public async Task<IEnumerable<Bill>> GetBillsByUser(int userId)
         {
+
             return await _context.BillDAs
                 .Where(billDA => billDA.UserDA.Id == userId)
                 .Select(billDA => new Bill(
                     billDA.Id,
-                    new User(),
                     billDA.BasePrice,
                     billDA.Iva,
                     billDA.Total,
-                    billDA.BillCouponDAs.Select(billCouponDA => new BillCoupon(
+                    billDA.BillCouponDAs.Select(billCouponDA => new BillCoupon (
                         billCouponDA.Id,
-                        new Bill(
-                            billCouponDA.BillDA.Id,
-                            new User(),
-                            billCouponDA.BillDA.BasePrice,
-                            billCouponDA.BillDA.Iva,
-                            billCouponDA.BillDA.Total,
-                            new List<BillCoupon>()
-                            ),
-                        billCouponDA.CouponId,
+                        new Coupon(),
                         billCouponDA.Quantity
-                        ))
+                    ))
                 )).ToListAsync();
         }
     }
