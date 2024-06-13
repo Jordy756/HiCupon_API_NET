@@ -55,5 +55,24 @@
             IsActive = isActive;
             this.CouponPromotions = CouponPromotions;
         }
+
+        public Coupon(int id)
+        {
+            this.Id = id;
+            this.Name = string.Empty;
+            this.Description = string.Empty;
+            this.Image = string.Empty;
+            this.CreationDate = DateTime.MinValue;
+            this.ReleaseDate = DateTime.MinValue;
+            this.ExpirationDate = DateTime.MinValue;
+            this.Price = 0;
+            this.Location = string.Empty;
+            this.Discount = 0;
+            this.Stock = 0;
+            this.Company = new Company();
+            this.Category = new Category();
+            this.IsActive = true;
+            this.CouponPromotions = new List<CouponPromotion>();
+        }
     }
 }

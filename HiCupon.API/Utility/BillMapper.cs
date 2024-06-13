@@ -1,8 +1,6 @@
 ﻿using HiCupon.API.DTOs;
 using HiCupon.BC.Models;
-using HiCupon.DA.Entities;
-using HiCupon.DA.Utility;
-using System.Net.Sockets;
+using static Azure.Core.HttpHeader;
 
 namespace HiCupon.API.Utility
 {
@@ -10,46 +8,63 @@ namespace HiCupon.API.Utility
     {
         public static BillDTO MapToBillDTO(Bill bill)
         {
-            return new BillDTO();
-            //BillDTO billDTO = new(
-            //    bill.Id,
-            //    new UserDTO(bill.User.Id, bill.User.Name, bill.User.LastName, bill.User.IdentificationCard, bill.User.DateBirth, bill.User.Email, bill.User.Password), /*UserMapper.MapToUserDTO(bill.User),*/
-            //    bill.BasePrice,
-            //    bill.Iva,
-            //    bill.Total,
-            //    BillCouponMapper.MapToBillCouponDTOs(bill.BillCoupons)
-            //);
-
-            //billDTO.BillCouponDTOs = BillCouponMapper.MapToBillCouponDTOs(bill.BillCoupons);
-
-            //return billDTO;
+            return new BillDTO(
+                bill.Id,
+                bill.TotalBasePrice,
+                bill.TotalDiscount,
+                bill.TotalTax,
+                bill.TotalPrice,
+                bill.BillCoupons.Select(billCoupon => new BillCouponDTO(
+                    billCoupon.Id,
+                    new CouponDTO(
+                        billCoupon.Coupon.Id,
+                        billCoupon.Coupon.Name,
+                        billCoupon.Coupon.Description,
+                        billCoupon.Coupon.Image,
+                        billCoupon.Coupon.CreationDate,
+                        billCoupon.Coupon.ReleaseDate,
+                        billCoupon.Coupon.ExpirationDate,
+                        billCoupon.Coupon.Price,
+                        billCoupon.Coupon.Stock,
+                        billCoupon.Coupon.Location,
+                        billCoupon.Coupon.Discount,
+                        billCoupon.Coupon.IsActive,
+                        new CategoryDTO(billCoupon.Coupon.Category.Id, billCoupon.Coupon.Category.Name),
+                        new CompanyDTO(billCoupon.Coupon.Company.Id, billCoupon.Coupon.Company.Name),
+                        billCoupon.Coupon.CouponPromotions.Select(couponPromotion => new CouponPromotionDTO(couponPromotion.Id, couponPromotion.Discount, couponPromotion.StartDate, couponPromotion.EndDate, new PromotionDTO(couponPromotion.Promotion.Id, couponPromotion.Promotion.Name)))
+                    ),
+                    billCoupon.Quantity,
+                    billCoupon.TotalBasePrice,
+                    billCoupon.TotalDiscount,
+                    billCoupon.TotalTax,
+                    billCoupon.TotalPrice
+                ))
+            );
         }
 
         public static Bill MapToBill(BillDTO billDTO)
         {
-            return new Bill();
-            //Bill bill = new(
-            //    billDTO.Id,
-            //    UserMapper.MapToUser(billDTO.UserDTO), //new User(billDTO.UserDTO.Id, billDTO.UserDTO.Name, billDTO.UserDTO.LastName, billDTO.UserDTO.IdentificationCard, billDTO.UserDTO.DateBirth, billDTO.UserDTO.Email, billDTO.UserDTO.Password),
-            //    billDTO.BasePrice,
-            //    billDTO.Iva,
-            //    billDTO.Total,
-            //    BillCouponMapper.MapToBillCoupons(billDTO.BillCouponDTOs) 
-            //);
-
-            //bill.BillCoupons = BillCouponMapper.MapToBillCoupons(billDTO.BillCouponDTOs);
-
-            //return bill;
+            return new Bill(
+                billDTO.Id,
+                billDTO.TotalBasePrice,
+                billDTO.TotalDiscount,
+                billDTO.TotalTax,
+                billDTO.TotalPrice,
+                billDTO.BillCouponDTOs.Select(billCouponDTO => new BillCoupon(
+                    billCouponDTO.Id,
+                    new Coupon (billCouponDTO.CouponDTO.Id),
+                    billCouponDTO.Quantity,
+                    billCouponDTO.TotalBasePrice,
+                    billCouponDTO.TotalDiscount,
+                    billCouponDTO.TotalTax,
+                    billCouponDTO.TotalPrice
+                ))
+            );
         }
+
         public static IEnumerable<BillDTO> MapToBillDTOs(IEnumerable<Bill> bills)
         {
-            return bills.Select(bill => MapToBillDTO(bill));
+            return bills.Select(MapToBillDTO);
         }
-
-        public static IEnumerable<Bill> MapToBills(IEnumerable<BillDTO> billDTOs)
-        {
-            return billDTOs.Select(billDTO => MapToBill(billDTO));
-        }
-
     }
 }

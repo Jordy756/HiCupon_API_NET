@@ -57,5 +57,24 @@ namespace HiCupon.API.DTOs
             CompanyDTO = companyDTO;
             CouponPromotionDTOs = couponPromotionDTOs;
         }
+
+        public CouponDTO(int id)
+        {
+            this.Id = id;
+            this.Name = string.Empty;
+            this.Description = string.Empty;
+            this.Image = string.Empty;
+            this.CreationDate = DateTime.MinValue;
+            this.ReleaseDate = DateTime.MinValue;
+            this.ExpirationDate = DateTime.MinValue;
+            this.Price = 0;
+            this.Location = string.Empty;
+            this.Discount = 0;
+            this.Stock = 0;
+            this.CompanyDTO = new CompanyDTO();
+            this.CategoryDTO = new CategoryDTO();
+            this.IsActive = true;
+            this.CouponPromotionDTOs = new List<CouponPromotionDTO>();
+        }
     }
 }

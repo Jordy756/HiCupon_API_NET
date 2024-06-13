@@ -14,4 +14,8 @@
     <ProjectReference Include="..\HiCupon.BW\HiCupon.BW.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Utility\" />
+  </ItemGroup>
+
 </Project>

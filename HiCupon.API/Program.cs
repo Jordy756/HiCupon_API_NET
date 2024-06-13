@@ -14,16 +14,14 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddHttpClient();
 
-//builder.Services.AddTransient<IManageBillBW, ManageBillBW>();
-//builder.Services.AddTransient<IManageBillDA, ManageBillDA>();
-//builder.Services.AddTransient<IManageBillCouponBW, ManageBillCouponBW>();
-//builder.Services.AddTransient<IManageBillCouponDA, ManageBillCouponDA>();
 builder.Services.AddTransient<IManageUserBW, ManageUserBW>();
 builder.Services.AddTransient<IManageUserDA, ManageUserDA>();
 builder.Services.AddTransient<IManageCouponBW, ManageCouponBW>();
 builder.Services.AddTransient<IManageCouponSG, ManageCouponSG>();
 builder.Services.AddTransient<IManageCategoryBW, ManageCategoryBW>();
 builder.Services.AddTransient<IManageCategorySG, ManageCategorySG>();
+builder.Services.AddTransient<IManageBillBW, ManageBillBW>();
+builder.Services.AddTransient<IManageBillDA, ManageBillDA>();
 
 builder.Services.AddDbContext<HiCouponContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DB")));
 

@@ -14,46 +14,55 @@ namespace HiCupon.DA.Actions
         {
             _context = context;
         }
-        public async Task<string> InsertBill(Bill bill, int userId)
+
+        public async Task<(bool, string)> InsertBill(Bill bill, int userId)
         {
             UserDA userDA = await _context.UserDAs.FindAsync(userId) ?? new();
 
-            if (userDA.Id == 0) throw new Exception("El usuario no existe");
+            if (userDA.Id == 0) return (false, "El usuario no existe");
 
-            BillDA billDA = new()
+            BillDA billDA = new ()
             {
                 UserDA = userDA,
-                BasePrice = bill.BasePrice,
-                Iva = bill.Iva,
-                Total = bill.Total,
-                BillCouponDAs = bill.BillCoupons.Select(r => new BillCouponDA
+                TotalBasePrice = bill.TotalBasePrice,
+                TotalDiscount = bill.TotalDiscount,
+                TotalTax = bill.TotalTax,
+                TotalPrice = bill.TotalPrice,
+                BillCouponDAs = bill.BillCoupons.Select(billCouponDA => new BillCouponDA
                 {
-                    BillDA = _context.BillDAs.Find(r.Coupon.Id) ?? new(),
+                    CouponId = billCouponDA.Coupon.Id,
+                    Quantity = billCouponDA.Quantity,
+                    TotalBasePrice = billCouponDA.TotalBasePrice,
+                    TotalDiscount = billCouponDA.TotalDiscount,
+                    TotalTax = billCouponDA.TotalTax,
+                    TotalPrice = billCouponDA.TotalPrice
                 }).ToList()
             };
 
             await _context.BillDAs.AddAsync(billDA);
             var result = await _context.SaveChangesAsync();
 
-            if (result == 0) throw new Exception("No se ha podido realizar la compra");
-
-            return "La compra se realizó de manera exitosa";
+            return result > 0 ? (true, "Compra realizada con exito") : (false, "Error al realizar la compra");
         }
 
         public async Task<IEnumerable<Bill>> GetBillsByUser(int userId)
         {
-
             return await _context.BillDAs
                 .Where(billDA => billDA.UserDA.Id == userId)
-                .Select(billDA => new Bill(
+                .Select(billDA => new Bill (
                     billDA.Id,
-                    billDA.BasePrice,
-                    billDA.Iva,
-                    billDA.Total,
+                    billDA.TotalBasePrice,
+                    billDA.TotalDiscount,
+                    billDA.TotalTax,
+                    billDA.TotalPrice,
                     billDA.BillCouponDAs.Select(billCouponDA => new BillCoupon (
                         billCouponDA.Id,
-                        new Coupon(),
-                        billCouponDA.Quantity
+                        new Coupon(billCouponDA.CouponId),
+                        billCouponDA.Quantity,
+                        billCouponDA.TotalBasePrice,
+                        billCouponDA.TotalDiscount,
+                        billCouponDA.TotalTax,
+                        billCouponDA.TotalPrice
                     ))
                 )).ToListAsync();
         }

@@ -3,26 +3,29 @@
     public class BillDTO
     {
         public int Id { get; set; }
-        public decimal BasePrice { get; set; }
-        public decimal Iva { get; set; }
-        public decimal Total { get; set; }
+        public decimal TotalBasePrice { get; set; }
+        public decimal TotalDiscount { get; set; }
+        public decimal TotalTax { get; set; }
+        public decimal TotalPrice { get; set; }
         public IEnumerable<BillCouponDTO> BillCouponDTOs { get; set; }
 
         public BillDTO()
         {
             this.Id = 0;
-            this.BasePrice = 0;
-            this.Iva = 0;
-            this.Total = 0;
+            this.TotalBasePrice = 0;
+            this.TotalDiscount = 0;
+            this.TotalTax = 0;
+            this.TotalPrice = 0;
             this.BillCouponDTOs = new List<BillCouponDTO>();
         }
 
-        public BillDTO(int id, decimal basePrice, decimal iva, decimal total, IEnumerable<BillCouponDTO> billCouponDTOs)
+        public BillDTO(int id, decimal totalBasePrice, decimal totalDiscount, decimal totalTax, decimal totalPrice, IEnumerable<BillCouponDTO> billCouponDTOs)
         {
             this.Id = id;
-            this.BasePrice = basePrice;
-            this.Iva = iva;
-            this.Total = total;
+            this.TotalBasePrice = totalBasePrice;
+            this.TotalDiscount = totalDiscount;
+            this.TotalTax = totalTax;
+            this.TotalPrice = totalPrice;
             this.BillCouponDTOs = billCouponDTOs;
         }
     }

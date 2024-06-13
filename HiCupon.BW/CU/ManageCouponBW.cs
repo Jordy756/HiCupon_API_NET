@@ -18,9 +18,9 @@ namespace HiCupon.BW.CU
             return await _manageCouponSG.GetSomeCoupons(search, category, page, elements);
         }
 
-        //public async Task<string> GetSomeCoupons(int page, int elements)
-        //{
-        //    return await _manageCouponSG.GetSomeCoupons(page, elements);
-        //}
+        public async Task<IEnumerable<Coupon>> GetSomeCouponsOfCustomer(string coupons, int page, int elements)
+        {
+            return await _manageCouponSG.GetSomeCouponsOfCustomer(coupons, page, elements);
+        }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using HiCupon.API.DTOs;
 using HiCupon.API.Utility;
+using HiCupon.BW.CU;
 using HiCupon.BW.Interfaces.BW;
+using HiCupon.DA.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HiCupon.API.Controllers
@@ -21,7 +23,8 @@ namespace HiCupon.API.Controllers
         {
             try
             {
-                return Ok(new { message = await _manageBillBW.InsertBill(BillMapper.MapToBill(billDTO), userId) });
+                var result = await _manageBillBW.InsertBill(BillMapper.MapToBill(billDTO), userId);
+                return result.Item1 ? Ok(new { message = result.Item2 }) : BadRequest(new { message = result.Item2 });
             }
             catch (Exception ex)
             {

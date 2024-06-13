@@ -28,5 +28,19 @@ namespace HiCupon.API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
+
+        [HttpGet("GetSomeCouponsOfCustomer/{coupons}/{page}/{elements}")]
+        public async Task<IActionResult> GetSomeCouponsOfCustomer(string coupons, int page, int elements)
+        {
+            try
+            {
+                var couponsOfCustomer = CouponMapper.MapToCouponDTOs(await _manageCouponBW.GetSomeCouponsOfCustomer(coupons, page, elements));
+                return Ok(couponsOfCustomer);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
     }
 }
